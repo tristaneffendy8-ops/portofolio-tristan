@@ -13,17 +13,41 @@
         .carousel-slide.active { display: block; }
     </style>
 </head>
-<body class="bg-[#d28684] text-[#4a2e2d] min-h-screen flex flex-col justify-center items-center selection:bg-[#f1cdca] p-4">
+<body class="bg-[#d28684] text-[#4a2e2d] min-h-screen flex flex-col justify-between selection:bg-[#f1cdca]">
 
-    <div class="w-full max-w-md md:max-w-5xl flex flex-col items-center">
-        
-        <header class="w-full text-center pb-4 md:pb-6">
-            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-[#e9dc4d] drop-shadow-sm">
+    <header class="w-full bg-[#4a2e2d] text-[#ebd6d4] shadow-md relative z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" onclick="goToSlide(0); return false;" class="text-xl md:text-2xl font-extrabold tracking-tight text-[#e9dc4d] hover:opacity-90 transition-opacity">
                 My Portfolio
-            </h1>
-        </header>
+            </a>
 
-        <main class="w-full">
+            <nav class="hidden md:flex space-x-6 font-semibold">
+                <a href="#" onclick="goToSlide(0); return false;" class="hover:text-[#e9dc4d] transition-colors">Home</a>
+                <a href="#" onclick="goToSlide(1); return false;" class="hover:text-[#e9dc4d] transition-colors">About</a>
+                <a href="#" onclick="goToSlide(3); return false;" class="hover:text-[#e9dc4d] transition-colors">Skills</a>
+                <a href="#" onclick="goToSlide(5); return false;" class="hover:text-[#e9dc4d] transition-colors">Projects</a>
+                <a href="#" onclick="goToSlide(12); return false;" class="hover:text-[#e9dc4d] transition-colors">Contact</a>
+            </nav>
+
+            <button id="menu-btn" class="block md:hidden focus:outline-none text-[#ebd6d4] hover:text-[#e9dc4d]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-[#593938] border-t border-[#4a2e2d] px-4 py-3 space-y-3 font-semibold shadow-inner">
+            <a href="#" onclick="goToSlide(0); toggleMobileMenu(); return false;" class="block hover:text-[#e9dc4d] transition-colors">Home</a>
+            <a href="#" onclick="goToSlide(1); toggleMobileMenu(); return false;" class="block hover:text-[#e9dc4d] transition-colors">About</a>
+            <a href="#" onclick="goToSlide(3); toggleMobileMenu(); return false;" class="block hover:text-[#e9dc4d] transition-colors">Skills</a>
+            <a href="#" onclick="goToSlide(5); toggleMobileMenu(); return false;" class="block hover:text-[#e9dc4d] transition-colors">Projects</a>
+            <a href="#" onclick="goToSlide(12); toggleMobileMenu(); return false;" class="block hover:text-[#e9dc4d] transition-colors">Contact</a>
+        </div>
+    </header>
+
+    <main class="w-full flex-grow flex items-center justify-center p-4 my-4">
+        <div class="w-full max-w-md md:max-w-5xl flex flex-col items-center">
+            
             <div class="relative w-full rounded-2xl overflow-hidden shadow-xl border-4 border-[#ebd6d4] bg-[#f2dfdd] aspect-[4/3] md:aspect-[16/9]">
                 
                 <div class="carousel-slide active w-full h-full">
@@ -81,11 +105,25 @@
                     1 / 13
                 </div>
             </div>
-        </main>
 
-    </div>
+        </div>
+    </main>
+
+    <footer class="w-full bg-[#4a2e2d] text-[#ebd6d4] py-4 text-center text-xs md:text-sm border-t border-[#ebd6d4]/20">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-2">
+            <div>
+                © 2026 Tristan Portfolio
+            </div>
+            <div class="flex space-x-4 text-[#e9dc4d]">
+                <a href="https://www.instagram.com/tristaneffendy8342/" target="_blank" class="hover:underline">Instagram</a>
+                <a href="https://shopee.co.id/tristaneffendy1608" target="_blank" class="hover:underline">Shopee</a>
+                <a href="https://t.me/TristD16" target="_blank" class="hover:underline">Telegram</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
+        // Logika Slider Carousel
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-slide');
         const slideIndexDisplay = document.getElementById('slide-index');
@@ -107,10 +145,25 @@
             showSlide(currentSlide + direction);
         }
 
+        // Fungsi langsung lompat ke slide tertentu berdasarkan urutan array (dimulai dari angka 0)
+        function goToSlide(slideNum) {
+            showSlide(slideNum);
+        }
+
         document.addEventListener('keydown', function(event) {
             if (event.key === 'ArrowLeft') changeSlide(-1);
             if (event.key === 'ArrowRight') changeSlide(1);
         });
+
+        // Logika Hamburger Menu (HP)
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        menuBtn.addEventListener('click', toggleMobileMenu);
     </script>
 
 </body>
